@@ -1,0 +1,32 @@
+﻿@model IList<string>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Movies</h2>
+<p>
+    <a asp-action="">Create New</a>
+</p>
+
+<table>
+    <thread>
+        <tr>
+            <th>Title</th>
+        </tr>
+    </thread>
+    <tbody>
+        <tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item</td>
+            </tr>
+        }
+        </tr>
+    </tbody>
+</table>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
