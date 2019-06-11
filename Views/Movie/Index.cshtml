@@ -1,17 +1,19 @@
-﻿@model IList<string>
+﻿@model IList<Movie>
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <h2>Movies</h2>
 <p>
-    <a asp-action="">Create New</a>
+    <a asp-action="Create">Create New</a>
 </p>
 
-<table>
+<table class="table">
     <thread>
         <tr>
             <th>Title</th>
+            <th>ReleaseDate</th>
+            <th>Genre</th>
         </tr>
     </thread>
     <tbody>
@@ -19,7 +21,14 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item</td>
+                <td>@Html.DisplayFor(_ => item.Title)</td>
+                <td>@Html.DisplayFor(_ => item.ReleaseDate)</td>
+                <td>@Html.DisplayFor(_ => item.Genre)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Detail" asp-route-id="@item.Id">Detail</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
             </tr>
         }
         </tr>

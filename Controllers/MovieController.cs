@@ -10,12 +10,9 @@ namespace SanookMovie.Controllers
 {
     public class MovieController : Controller
     {
-        IList<string> _movies = new List<string>();
+        static IList<Movie> _movies = new List<Movie>();
         public MovieController()
         {
-            _movies.Add("Titanic");
-            _movies.Add("Avengers");
-            _movies.Add("Alita");
         }
 
         public IActionResult Index()
@@ -28,12 +25,43 @@ namespace SanookMovie.Controllers
             return View();
         }
 
-        public IActionResult Update()
+        [HttpPost]
+        public IActionResult Create(Movie movie)
+        {
+            movie.Id = _movies.Count + 1;
+            _movies.Add(movie);
+            return RedirectToAction(nameof(Index));
+            ;
+        }
+
+        public IActionResult Edit()
         {
             return View();
         }
 
-        public IActionResult Delete()
+        public IActionResult Delete(int id)
+        {
+            var movie = _movies.FirstOrDefault(x => x.Id == id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            return View(movie);
+        }
+
+        public IActionResult DeleteConfirm(int id)
+        {
+            var movie = _movies.FirstOrDefault(x => x.Id == id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            _movies.Remove(movie);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Details()
         {
             return View();
         }
